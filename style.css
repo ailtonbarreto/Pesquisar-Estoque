@@ -1,0 +1,85 @@
+
+:root{
+    --text-color: #0f8f8f;
+    --bg-color: #eaf7f5;
+    --card-color:#ffffff;
+}
+
+@font-face {
+    font-family: 'MinhaFonte';
+    src: url('../font/PlaypenSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    background-color: var(--bg-color);
+    font-family: 'MinhaFonte', sans-serif;
+}
+
+
+img{
+    width: 7vw;
+}
+
+.section{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(15vw,1fr));
+    gap: 1vw;
+    padding: 1vw;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    gap: 0.5vw;
+    padding: 1vw;
+    height: 17vw;
+    background-color: var(--card-color);
+    color: var(--text-color);
+    border-radius: 0.4vw;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.logo{
+    width: 3vw;
+}
+
+h2{
+    color: var(--text-color);
+}
+.search-div{
+    display: flex;
+    align-items: center;
+    padding: 2vw 4vw;
+    justify-content: space-between;
+}
+
+.pequisa{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pesquisar-text{
+    color: var(--text-color);
+    margin-bottom: 0.3vw;
+}
+
+#filterInput{
+    outline: none;
+    padding: 0.5vw;
+    height: 1.5vw;
+    color: var(--text-color);
+    border: var(--text-color);
+}
