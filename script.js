@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const filterInput = document.getElementById("filterInput");
     let dadosSalvos = [];
 
-    // Função para carregar os dados da API
+    
     async function Load_Data() {
         try {
             const response = await fetch(url);
@@ -20,64 +20,111 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+  
+    function agruparPorParent(produtos) {
+        const grupos = {};
+
+        produtos.forEach(produto => {
+            const chavePai = produto.PARENT || produto.SKU;
+            if (!grupos[chavePai]) {
+                grupos[chavePai] = [];
+            }
+            grupos[chavePai].push(produto);
+        });
+
+        return grupos;
+    }
+
     // Função para criar o card de cada produto
-    function criarCardProduto(produto) {
+    function criarCardProduto(parentProduto, produtos) {
         const card = document.createElement("figure");
-        card.id = produto.SKU;
+        card.id = parentProduto.PARENT;
         card.classList.add("card");
 
+        // Nome do produto principal (parent)
         const listName = document.createElement("p");
         listName.classList.add("product-name");
-        listName.textContent = produto.DESCRICAO;
+        listName.textContent = parentProduto.DESCRICAO_PARENT
         card.appendChild(listName);
 
+        // Adicionar imagem do produto
         const img = document.createElement("img");
-        img.src = produto.IMAGEM;
+        img.src = parentProduto.IMAGEM
+        img.alt = parentProduto.DESCRICAO_PARENT
         card.appendChild(img);
 
-        const sku = document.createElement("p");
-        sku.classList.add("sku");
-        sku.textContent = `SKU: ${produto.SKU}`;
-        card.appendChild(sku);
+ 
+        const parentInfo = document.createElement("p");
+        parentInfo.classList.add("parent-info");
+        parentInfo.textContent = `Parent: ${parentProduto.PARENT || "Sem Parent"}`;
+        card.appendChild(parentInfo);
 
-        const stock = document.createElement("p");
-        stock.classList.add("estoque");
-        stock.textContent = `Estoque: ${produto.ESTOQUE}`;
-        card.appendChild(stock);
+     
+        const tamanhosInfo = document.createElement("p");
+        tamanhosInfo.classList.add("tamanhos-info");
+
+        let tamanhosTexto = [];
+        const variacaoEstoque = {};
+
+        
+        produtos.forEach(produto => {
+            const variacao = produto.VARIACAO || "UN";
+            if (!variacaoEstoque[variacao]) {
+                variacaoEstoque[variacao] = 0;
+            }
+            variacaoEstoque[variacao] += parseInt(produto.ESTOQUE, 10);
+        });
+
+    
+        for (const [variacao, estoque] of Object.entries(variacaoEstoque)) {
+            if (estoque > 0) {
+                if (variacao === "UN") {
+                    tamanhosTexto.push(`UN: ${estoque}`);
+                } else {
+                    tamanhosTexto.push(`${variacao}: ${estoque}`);
+                }
+            }
+        }
+
+        if (tamanhosTexto.length > 0) {
+            tamanhosInfo.textContent = `${tamanhosTexto.join(" | ")}`;
+            card.appendChild(tamanhosInfo);
+        }
 
         return card;
     }
 
- 
     function displayProducts(produtos) {
         section_data.innerHTML = "";
-        produtos.forEach(item => {
-            const card = criarCardProduto(item);
+        const agrupados = agruparPorParent(produtos);
+
+   
+        Object.entries(agrupados).forEach(([parentSKU, produtosGrupo]) => {
+            const parentProduto = produtosGrupo[0];
+            const card = criarCardProduto(parentProduto, produtosGrupo);
             section_data.appendChild(card);
         });
     }
 
-    // Função de filtragem em tempo real
+ 
     filterInput.addEventListener("input", () => {
         const searchValue = filterInput.value.toLowerCase().trim();
 
         if (searchValue === "") {
             displayProducts(dadosSalvos);
         } else {
-
-            const regex = new RegExp(searchValue.split('').join('.*'), 'i');
-
-            // Filtra os produtos com base na descrição ou SKU
+        
             const filteredProducts = dadosSalvos.filter(produto => {
-                const skuMatch = regex.test(produto.SKU.toString());
-                const descriptionMatch = regex.test(produto.DESCRICAO.toLowerCase());
+                const skuMatch = produto.SKU && produto.SKU.toLowerCase().includes(searchValue);
+                const descriptionMatch = produto.DESCRICAO_PARENT && produto.DESCRICAO_PARENT.toLowerCase().includes(searchValue);
                 return skuMatch || descriptionMatch;
             });
+
             displayProducts(filteredProducts);
         }
     });
 
-    // Função para carregar e exibir os produtos
+   
     async function load_products() {
         if (dadosSalvos.length) {
             displayProducts(dadosSalvos);
@@ -86,3 +133,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     Load_Data();
 });
+

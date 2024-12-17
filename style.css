@@ -26,14 +26,16 @@ body{
 
 
 img{
-    width: 7vw;
+    width: 10vw;
 }
 
-.section{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(15vw,1fr));
+
+.section {
+    display: grid; /* Define a grade */
+    grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
     gap: 1vw;
     padding: 1vw;
+    box-sizing: border-box;
 }
 
 .card{
@@ -42,13 +44,16 @@ img{
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    gap: 0.5vw;
     padding: 1vw;
-    height: 17vw;
+    height: 22vw;
     background-color: var(--card-color);
     color: var(--text-color);
     border-radius: 0.4vw;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.tamanhos-info{
+    font-size: 0.8vw;
 }
 
 .logo{
