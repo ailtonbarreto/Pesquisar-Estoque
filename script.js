@@ -35,19 +35,18 @@ document.addEventListener("DOMContentLoaded", () => {
         return grupos;
     }
 
-    // Função para criar o card de cada produto
+
     function criarCardProduto(parentProduto, produtos) {
         const card = document.createElement("figure");
         card.id = parentProduto.PARENT;
         card.classList.add("card");
 
-        // Nome do produto principal (parent)
+    
         const listName = document.createElement("p");
         listName.classList.add("product-name");
         listName.textContent = parentProduto.DESCRICAO_PARENT
         card.appendChild(listName);
 
-        // Adicionar imagem do produto
         const img = document.createElement("img");
         img.src = parentProduto.IMAGEM
         img.alt = parentProduto.DESCRICAO_PARENT
@@ -56,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
  
         const parentInfo = document.createElement("p");
         parentInfo.classList.add("parent-info");
-        parentInfo.textContent = `Parent: ${parentProduto.PARENT || "Sem Parent"}`;
+        parentInfo.textContent = `Parent: ${parentProduto.PARENT}`;
         card.appendChild(parentInfo);
 
      
