@@ -29,12 +29,24 @@ img{
     width: 10vw;
 }
 
+header{
+    display: flex;
+    top: 0;
+    position: fixed;
+    align-items: center;
+    width: 100vw;
+    padding: 0 4vw;
+    background-color: var(--text-color);
+    justify-content: space-between;
+}
+
 
 .section {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
     gap: 1vw;
     padding: 2vw;
+    margin-top: 6vw;
     box-sizing: border-box;
 }
 
@@ -57,28 +69,23 @@ img{
 }
 
 .logo{
-    width: 3vw;
+    width: 5vw;
 }
 
 h2{
-    color: var(--text-color);
+    color: #fff;
 }
 
-.search-div{
-    display: flex;
-    align-items: center;
-    padding: 2vw 4vw;
-    justify-content: space-between;
-}
 
 .pequisa{
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 1vw 0;
 }
 
 .pesquisar-text{
-    color: var(--text-color);
+    color: #fff;
     margin-bottom: 0.3vw;
 }
 
@@ -88,7 +95,11 @@ h2{
     height: 1.5vw;
     color: var(--text-color);
     border: var(--text-color);
+    border-radius: 0.3vw;
 }
+
+/* ---------------------------------------------------------------------------------- */
+/* VERSAO MOBILE */
 
 @media screen and (max-width: 728px){
 
@@ -100,6 +111,7 @@ h2{
         gap: 5vw;
         padding: 2vw;
         box-sizing: border-box;
+        margin-top: 32vw;
     }
     
     .card{
@@ -116,29 +128,27 @@ h2{
         font-size: 5vw;
     }
     
-    .search-div{
+    header{
         display: flex;
         align-items: center;
         flex-direction: column;
-        padding: 2vw 4vw;
+        padding: 2vw;
         justify-content: space-between;
     }
 
     .logo{
-        width: 20vw;
-        margin-bottom: 2vw;
+        display: none;
     }
 
     .pequisa{
-        margin-top: 4vw;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         gap: 3vw;
         align-items: center;
     } 
     
     .pesquisar-text{
-        color: var(--text-color);
+        color: #fff;
         font-size: 3vw;
         margin-bottom: 0.3vw;
     }
