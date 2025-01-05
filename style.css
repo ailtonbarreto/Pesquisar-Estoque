@@ -1,4 +1,4 @@
-/* ---------------------------------------------------------------------- */
+
 /* VARIAVEIS */
 :root{
     --text-color: #0f8f8f;
@@ -11,10 +11,11 @@
 /* FONTES */
 @font-face {
     font-family: 'MinhaFonte';
-    src: url('../font/PlaypenSans-Regular.ttf') format('truetype');
+    src: url('./font/PlaypenSans-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
+
 
 /* ---------------------------------------------------------------------- */
 
