@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (tamanhosTexto.length > 0) {
-            tamanhosInfo.textContent = `${parentProduto.PARENT}-${tamanhosTexto.join(" | ")}`;
+            tamanhosInfo.textContent = `${tamanhosTexto.join(" | ")}`;
             card.appendChild(tamanhosInfo);
         }
 
