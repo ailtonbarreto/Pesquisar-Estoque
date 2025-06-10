@@ -78,8 +78,8 @@ header{
 .section {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
-    gap: 1vw;
-    padding: 2vw;
+    gap: 3vw;
+    padding: 0 3vw;
     margin-top: 6vw;
     box-sizing: border-box;
 }
@@ -91,7 +91,7 @@ header{
     align-items: center;
     text-align: center;
     padding: 1vw;
-    height: 22vw;
+    height: 25vw;
     background-color: var(--card-color);
     color: var(--text-color);
     border-radius: 0.4vw;
@@ -143,14 +143,13 @@ h2{
         align-items: center;
         text-align: center;
         gap: 5vw;
-        padding: 2vw;
         box-sizing: border-box;
         margin-top: 32vw;
     }
     
     .card{
         height: 90vw;
-        width: 90vw;
+        width: 80vw;
         padding: 6vw 2vw;
     }
 
